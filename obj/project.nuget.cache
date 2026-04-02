@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "tcYx+H+kMMY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Weilonde\\ChatServer\\message-server\\ChatServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.3.0\\microsoft.aspnetcore.http.extensions.2.3.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.0\\microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.aspnetcore.websockets\\2.3.9\\microsoft.aspnetcore.websockets.2.3.9.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\microsoft.net.http.headers\\2.3.0\\microsoft.net.http.headers.2.3.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\system.buffers\\4.6.0\\system.buffers.4.6.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\system.net.websockets.websocketprotocol\\5.1.0\\system.net.websockets.websocketprotocol.5.1.0.nupkg.sha512",
+    "C:\\Users\\Weilonde\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
