@@ -1,0 +1,90 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/weilon/Desktop/UselessProjects/Server-for-Mosquito/Server-for-Mosquito/ChatServer.csproj": {}
+  },
+  "projects": {
+    "/home/weilon/Desktop/UselessProjects/Server-for-Mosquito/Server-for-Mosquito/ChatServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/weilon/Desktop/UselessProjects/Server-for-Mosquito/Server-for-Mosquito/ChatServer.csproj",
+        "projectName": "ChatServer",
+        "projectPath": "/home/weilon/Desktop/UselessProjects/Server-for-Mosquito/Server-for-Mosquito/ChatServer.csproj",
+        "packagesPath": "/home/weilon/.nuget/packages/",
+        "outputPath": "/home/weilon/Desktop/UselessProjects/Server-for-Mosquito/Server-for-Mosquito/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/weilon/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.WebSockets": {
+              "target": "Package",
+              "version": "[2.3.9, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.29, 8.0.29]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[8.0.29, 8.0.29]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.110/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
