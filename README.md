@@ -1,4 +1,4 @@
-```markdown
+
 # Server-for-Mosquito
 
 WebSocket chat server using ASP.NET Core 8 + PostgreSQL.
@@ -67,4 +67,3 @@ WebSocket URL: `ws://localhost:5000/?username=YourName`
 - `chat` – `{"type":"chat","from":"A","to":"B","text":"Hi"}`
 - `get_conversations` – `{"type":"get_conversations"}`
 - `get_messages` – `{"type":"get_messages","with":"B"}`
-```
