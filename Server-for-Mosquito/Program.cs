@@ -52,12 +52,14 @@ async Task HandleWebSocket(HttpContext context, WebSocket webSocket)
     {
         await EnsureUserExists(username);
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error registering user: {ex.Message}");
-        await webSocket.CloseAsync(WebSocketCloseStatus.InternalServerError, ex.Message, CancellationToken.None);
-        return;
-    }
+   catch (Exception ex)
+{
+    Console.WriteLine($"Error registering user: {ex.GetType().Name} - {ex.Message}");
+    Console.WriteLine(ex.StackTrace);
+    // вместо закрытия сокета можно отправить сообщение об ошибке клиенту
+    await SendTo(webSocket, new { error = "DB error: " + ex.Message });
+    await webSocket.CloseAsync(WebSocketCloseStatus.InternalServerError, "DB error", CancellationToken.None);
+}
 
     clients[username] = webSocket;
 
@@ -153,10 +155,19 @@ async Task ProcessMessage(string messageJson, string currentUser)
                         return;
                     }
 
+                    var outMsg = new { from = fromUser, to = toUser, text, timestamp };
+
                     if (clients.TryGetValue(toUser, out var receiverSocket) && receiverSocket.State == WebSocketState.Open)
                     {
-                        var outMsg = new { from = fromUser, to = toUser, text, timestamp };
                         await SendTo(receiverSocket, outMsg);
+                    }
+
+                    // Отправляем сообщение обратно самому отправителю: раньше это не делалось,
+                    // и собственный текст появлялся в чате только после повторной загрузки
+                    // истории (get_messages). Теперь UI отправителя обновляется сразу.
+                    if (clients.TryGetValue(currentUser, out var senderSocket) && senderSocket.State == WebSocketState.Open)
+                    {
+                        await SendTo(senderSocket, outMsg);
                     }
                 }
                 break;
@@ -274,6 +285,7 @@ async Task<bool> SaveMessage(string fromUser, string toUser, string text, long t
     await using var transaction = await conn.BeginTransactionAsync();
     try
     {
+        // 1. Сохраняем сообщение
         await using (var cmdMsg = new NpgsqlCommand(
             "INSERT INTO messages (sender_id, receiver_id, text, timestamp) VALUES (@fromId, @toId, @text, to_timestamp(@timestamp))",
             conn, transaction))
@@ -285,13 +297,9 @@ async Task<bool> SaveMessage(string fromUser, string toUser, string text, long t
             await cmdMsg.ExecuteNonQueryAsync();
         }
 
-        string user1, user2;
-        if (string.Compare(fromUser, toUser, StringComparison.Ordinal) < 0) { user1 = fromUser; user2 = toUser; }
-        else { user1 = toUser; user2 = fromUser; }
-
-        int id1, id2;
-        (id1, id2) = await GetUserIds(conn, user1, user2);
-        if (id1 == 0 || id2 == 0) return false;
+        // 2. Обновляем диалог – гарантируем, что user1_id < user2_id
+        int user1Id = Math.Min(fromId, toId);
+        int user2Id = Math.Max(fromId, toId);
 
         await using (var cmdConv = new NpgsqlCommand(
             "INSERT INTO conversations (user1_id, user2_id, last_message_text, last_message_timestamp) " +
@@ -301,8 +309,8 @@ async Task<bool> SaveMessage(string fromUser, string toUser, string text, long t
             "    last_message_timestamp = EXCLUDED.last_message_timestamp",
             conn, transaction))
         {
-            cmdConv.Parameters.AddWithValue("id1", id1);
-            cmdConv.Parameters.AddWithValue("id2", id2);
+            cmdConv.Parameters.AddWithValue("id1", user1Id);
+            cmdConv.Parameters.AddWithValue("id2", user2Id);
             cmdConv.Parameters.AddWithValue("text", text);
             cmdConv.Parameters.AddWithValue("timestamp", timestamp);
             await cmdConv.ExecuteNonQueryAsync();
@@ -317,7 +325,6 @@ async Task<bool> SaveMessage(string fromUser, string toUser, string text, long t
         throw;
     }
 }
-
 async Task<(int, int)> GetUserIds(NpgsqlConnection conn, string user1, string user2)
 {
     await using var cmd = new NpgsqlCommand(
@@ -418,7 +425,6 @@ async Task SendError(string user, string message)
     }
 }
 
-// Класс в самом конце файла
 
 
 app.Run();
