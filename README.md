@@ -47,15 +47,7 @@ Default: `Host=postgres;Port=5432;Database=main_db;Username=main_usesr;Password=
 ### Local
 
 ```bash
-dotnet restore
-dotnet run
-```
-
-### Docker
-
-```bash
-docker build -t mosquito-chat-server .
-docker run -d -p 8090:8090 -e DATABASE_URL="..." mosquito-chat-server
+docker-compose up --build
 ```
 
 ## Connect
