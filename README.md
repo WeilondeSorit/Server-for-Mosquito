@@ -52,7 +52,7 @@ docker-compose up --build
 
 ## Connect
 
-WebSocket URL: `ws://localhost:5000/?username=YourName`
+WebSocket URL: `ws://localhost:5008/?username=YourName`
 
 ### JSON messages
 
