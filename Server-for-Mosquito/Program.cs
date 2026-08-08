@@ -162,9 +162,6 @@ async Task ProcessMessage(string messageJson, string currentUser)
                         await SendTo(receiverSocket, outMsg);
                     }
 
-                    // Отправляем сообщение обратно самому отправителю: раньше это не делалось,
-                    // и собственный текст появлялся в чате только после повторной загрузки
-                    // истории (get_messages). Теперь UI отправителя обновляется сразу.
                     if (clients.TryGetValue(currentUser, out var senderSocket) && senderSocket.State == WebSocketState.Open)
                     {
                         await SendTo(senderSocket, outMsg);

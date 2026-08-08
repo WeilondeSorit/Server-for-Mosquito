@@ -8,8 +8,9 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    networks:
+      - app-network
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U main_usesr -d main_db"]
       interval: 10s
@@ -21,13 +22,18 @@ services:
     ports:
       - "5008:8080"
     environment:
-      
-      - DATABASE_URL=Host=postgr;Port=5432;Database=main_db;Username=main_usesr;Password=MainTestAppPass;Ssl Mode=Disable
-      # Заставляем сервер слушать на всех интерфейсах, порт 8080
+
+      - DATABASE_URL=Host=postgr;Port=5432;Database=main_db;Username=main_usesr;Password=MainTestAppPass;SslMode=Disable
       - ASPNETCORE_URLS=http://+:8080
+    networks:
+      - app-network
     depends_on:
       postgr:
         condition: service_healthy
 
 volumes:
   pgdata:
+
+networks:
+  app-network:
+    driver: bridge
