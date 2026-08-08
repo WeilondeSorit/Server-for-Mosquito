@@ -19,8 +19,7 @@ app.UseWebSockets(new WebSocketOptions
     KeepAliveInterval = TimeSpan.FromSeconds(30)
 });
 
-var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
-    ?? "Host=postgr;Port=5432;Database=main_db;Username=main_usesr;Password=MainTestAppPass";
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
 var clients = new ConcurrentDictionary<string, WebSocket>();
 var callSessions = new ConcurrentDictionary<string, CallSession>();
