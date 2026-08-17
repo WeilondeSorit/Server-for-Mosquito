@@ -1,4 +1,4 @@
-```markdown
+
 # Server-for-Mosquito
 
 WebSocket chat server using ASP.NET Core 8 + PostgreSQL.
@@ -47,24 +47,15 @@ Default: `Host=postgres;Port=5432;Database=main_db;Username=main_usesr;Password=
 ### Local
 
 ```bash
-dotnet restore
-dotnet run
-```
-
-### Docker
-
-```bash
-docker build -t mosquito-chat-server .
-docker run -d -p 8090:8090 -e DATABASE_URL="..." mosquito-chat-server
+docker-compose up --build
 ```
 
 ## Connect
 
-WebSocket URL: `ws://localhost:5000/?username=YourName`
+WebSocket URL: `ws://localhost:5008/?username=YourName`
 
 ### JSON messages
 
 - `chat` – `{"type":"chat","from":"A","to":"B","text":"Hi"}`
 - `get_conversations` – `{"type":"get_conversations"}`
 - `get_messages` – `{"type":"get_messages","with":"B"}`
-```
